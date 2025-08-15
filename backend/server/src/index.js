@@ -529,6 +529,27 @@ app.post('/api/admin/leaderboard/remove', authMiddleware, adminOnly, async (req,
   } catch (e) { next(e); }
 });
 
+// Admin leaderboard endpoint with usernames
+app.get('/api/admin/leaderboard/:game', authMiddleware, adminOnly, async (req, res, next) => {
+  try {
+    const game = String(req.params.game);
+    const { limit = '100', offset = '0' } = req.query || {};
+    const lim = Math.min(500, Math.max(1, parseInt(String(limit), 10)));
+    const off = Math.max(0, parseInt(String(offset), 10));
+    
+    const rows = await all(
+      `SELECT l.user_id, u.username, l.game, l.score, l.created_at, l.updated_at
+       FROM leaderboard l 
+       JOIN users u ON u.id = l.user_id
+       WHERE l.game = ?
+       ORDER BY l.score DESC LIMIT ? OFFSET ?`,
+      [game, lim, off]
+    );
+    
+    return res.json(rows);
+  } catch (e) { next(e); }
+});
+
 app.post('/api/admin/blackjack/set_balance', authMiddleware, adminOnly, async (req, res, next) => {
   try {
     const { userId, amount } = req.body || {};
@@ -572,7 +593,7 @@ app.get('/api/admin/users', authMiddleware, adminOnly, async (req, res, next) =>
       [...params, pageSize, offset]
     );
 
-    return res.json({ success: true, data: { users: rows, pagination: { page, pageSize, total: countRow?.cnt || 0 } } });
+    return res.json(rows);
   } catch (e) { next(e); }
 });
 
