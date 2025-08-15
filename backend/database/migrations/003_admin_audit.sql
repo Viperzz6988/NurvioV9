@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS admin_audit (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	admin_user_id VARCHAR(36) NOT NULL,
+	action VARCHAR(64) NOT NULL,
+	target_user_id VARCHAR(36),
+	game VARCHAR(64),
+	details TEXT,
+	ip_address VARCHAR(64),
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;

@@ -1,0 +1,461 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Modern blue-based color palette */
+    --background: 220 20% 97%;
+    --foreground: 220 15% 15%;
+
+    --card: 220 20% 99%;
+    --card-foreground: 220 15% 15%;
+
+    --popover: 220 20% 99%;
+    --popover-foreground: 220 15% 15%;
+
+    --primary: 214 84% 56%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 214 84% 70%;
+
+    --secondary: 220 13% 91%;
+    --secondary-foreground: 220 15% 25%;
+
+    --muted: 220 13% 93%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 214 84% 56%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 87%;
+    --input: 220 13% 87%;
+    --ring: 214 84% 56%;
+
+    --radius: 0.75rem;
+
+    /* Glass effect colors */
+    --glass-bg: 220 20% 99%;
+    --glass-border: 220 13% 91%;
+    --glass-shadow: 220 15% 15%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-glass: linear-gradient(135deg, hsla(var(--glass-bg), 0.8), hsla(var(--glass-bg), 0.4));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(214 84% 70%));
+
+    /* Shadows */
+    --shadow-glass: 0 8px 32px hsla(var(--glass-shadow), 0.1);
+    --shadow-card: 0 4px 16px hsla(var(--glass-shadow), 0.08);
+    --shadow-hover: 0 12px 40px hsla(var(--primary), 0.2);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode with elegant blue accents */
+    --background: 220 15% 8%;
+    --foreground: 220 15% 95%;
+
+    --card: 220 15% 12%;
+    --card-foreground: 220 15% 95%;
+
+    --popover: 220 15% 12%;
+    --popover-foreground: 220 15% 95%;
+
+    --primary: 214 84% 65%;
+    --primary-foreground: 220 15% 8%;
+    --primary-glow: 214 84% 75%;
+
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 220 15% 85%;
+
+    --muted: 220 15% 15%;
+    --muted-foreground: 220 9% 60%;
+
+    --accent: 214 84% 65%;
+    --accent-foreground: 220 15% 8%;
+
+    --destructive: 0 75% 65%;
+    --destructive-foreground: 220 15% 95%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 214 84% 65%;
+
+    /* Dark glass effects */
+    --glass-bg: 220 15% 12%;
+    --glass-border: 220 15% 25%;
+    --glass-shadow: 220 15% 5%;
+
+    /* Dark gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-glass: linear-gradient(135deg, hsla(var(--glass-bg), 0.9), hsla(var(--glass-bg), 0.6));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(214 84% 75%));
+
+    /* Dark shadows */
+    --shadow-glass: 0 8px 32px hsla(var(--glass-shadow), 0.3);
+    --shadow-card: 0 4px 16px hsla(var(--glass-shadow), 0.2);
+    --shadow-hover: 0 12px 40px hsla(var(--primary), 0.3);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Glass morphism effects */
+  .glass {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-card {
+    @apply glass rounded-lg p-6;
+  }
+
+  /* Modern button variants */
+  .btn-glass {
+    @apply glass px-6 py-3 rounded-lg font-medium;
+    transition: var(--transition-smooth);
+  }
+
+  .btn-glass:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Navigation styles */
+  .nav-glass {
+    @apply glass fixed top-0 left-0 right-0 z-50;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Smooth animations */
+  .animate-slide-down {
+    animation: slideDown 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    transition: var(--transition-smooth);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Mobile menu styles */
+  .mobile-menu {
+    @apply glass fixed inset-0 z-40;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Dark mode toggle */
+  .dark-toggle {
+    @apply glass p-3 rounded-full;
+    transition: var(--transition-spring);
+  }
+
+  .dark-toggle:hover {
+    transform: rotate(180deg) scale(1.1);
+  }
+
+  /* Money rain items */
+  .money-bill {
+    width: 36px;
+    height: 18px;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    animation: moneyFall 1.8s ease-in forwards;
+    opacity: 0.95;
+  }
+  .money-coin {
+    width: 18px;
+    height: 18px;
+    background: radial-gradient(circle at 30% 30%, #fde68a 0%, #facc15 40%, #d97706 100%);
+    border-radius: 9999px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    animation: coinFall 1.6s ease-in forwards;
+    opacity: 0.95;
+  }
+  .money-amount-pop {
+    animation: amountPop 700ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  /* Lose blast */
+  .lose-x {
+    position: relative;
+    width: 64px;
+    height: 64px;
+  }
+  .lose-x::before,
+  .lose-x::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform-origin: center;
+    width: 12px; height: 100%;
+    background: #ef4444;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(239, 68, 68, 0.35);
+  }
+  .lose-x::before { transform: translateX(-50%) rotate(45deg); }
+  .lose-x::after { transform: translateX(-50%) rotate(-45deg); }
+
+  .animate-blink-fade { animation: blinkFade 1.2s ease-out forwards; }
+
+  /* Coin burst */
+  .coin-burst {
+    position: relative;
+    width: 10rem; height: 10rem;
+    border-radius: 9999px;
+    pointer-events: none;
+    animation: coinBurst 1s ease-out forwards;
+  }
+  .coin-burst::before,
+  .coin-burst::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background:
+      radial-gradient(circle at 50% 0%, #facc15 0 6px, transparent 7px) 50% 6%,
+      radial-gradient(circle at 100% 50%, #facc15 0 6px, transparent 7px) calc(100% - 6px) 50%,
+      radial-gradient(circle at 50% 100%, #facc15 0 6px, transparent 7px) 50% calc(100% - 6px),
+      radial-gradient(circle at 0% 50%, #facc15 0 6px, transparent 7px) 6% 50%;
+    background-size: 1.2rem 1.2rem;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
+  }
+  .coin-burst::after {
+    transform: rotate(45deg);
+  }
+
+  /* Money fly away */
+  .money-fly-away {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 20% 80%, rgba(34,197,94,0.9) 0 6px, transparent 7px),
+      radial-gradient(circle at 40% 85%, rgba(250,204,21,0.9) 0 5px, transparent 6px),
+      radial-gradient(circle at 60% 90%, rgba(34,197,94,0.9) 0 6px, transparent 7px),
+      radial-gradient(circle at 80% 95%, rgba(250,204,21,0.9) 0 5px, transparent 6px),
+      radial-gradient(circle at 30% 70%, rgba(34,197,94,0.9) 0 6px, transparent 7px),
+      radial-gradient(circle at 70% 75%, rgba(250,204,21,0.9) 0 5px, transparent 6px);
+    animation: moneyFly 1.1s ease-in forwards;
+  }
+
+  /* Wheel winner pulse */
+  .wheel-win-flash {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8rem; height: 8rem;
+    border-radius: 9999px;
+    border: 4px solid rgba(34,197,94,0.9);
+    box-shadow: 0 0 0 0 rgba(34,197,94,0.45);
+    animation: pulseRing 1200ms ease-out 1;
+  }
+
+  /* Highlight the active winning segment */
+  .wheel-segment-highlight {
+    filter: drop-shadow(0 0 12px rgba(34,197,94,0.65));
+    animation: pulseRing 1200ms ease-out 1;
+  }
+
+  /* Blackjack table surface */
+  .table-surface {
+    background: radial-gradient(circle at 50% 10%, rgba(16,185,129,0.12), transparent 60%),
+                radial-gradient(circle at 50% 120%, rgba(16,185,129,0.08), transparent 60%),
+                var(--gradient-glass);
+  }
+
+  /* Playing card deal-in animation */
+  .card-deal { animation: dealIn 320ms ease-out both; }
+
+  /* Poker chips */
+  .chip {
+    position: relative;
+    width: 42px; height: 42px;
+    border-radius: 9999px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15), inset 0 2px 0 rgba(255,255,255,0.6);
+    border: 3px solid rgba(255,255,255,0.85);
+  }
+  .chip::after {
+    content: '';
+    position: absolute; inset: 9px;
+    border-radius: 9999px; background: rgba(255,255,255,0.85);
+    mix-blend-mode: overlay;
+  }
+  .chip-denom-1 { background: #9CA3AF; }
+  .chip-denom-5 { background: #EF4444; }
+  .chip-denom-25 { background: #10B981; }
+  .chip-denom-100 { background: #3B82F6; }
+  .chip-denom-500 { background: #8B5CF6; }
+
+  .chip-stack { position: relative; width: 42px; height: 60px; }
+  .chip-stack .chip { position: absolute; left: 0; }
+
+  /* Wheel sparkles near pointer */
+  .wheel-sparkles {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    width: 80px; height: 80px; pointer-events: none;
+    background:
+      radial-gradient(circle at 20% 40%, rgba(34,197,94,0.8) 0 3px, transparent 4px),
+      radial-gradient(circle at 70% 30%, rgba(250,204,21,0.8) 0 2px, transparent 3px),
+      radial-gradient(circle at 50% 70%, rgba(34,197,94,0.8) 0 3px, transparent 4px);
+    animation: sparkleBurst 900ms ease-out 1;
+    filter: drop-shadow(0 0 8px rgba(34,197,94,0.5));
+  }
+
+  /* Blackjack visual styles moved to src/styles/blackjack-table.css to simplify overrides and theming. */}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes moneyFall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(240deg); opacity: 0; }
+}
+@keyframes coinFall {
+  0% { transform: translateY(-10vh) rotateY(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(110vh) rotateY(540deg); opacity: 0; }
+}
+@keyframes amountPop {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); }
+}
+@keyframes blinkFade {
+  0%, 20%, 40%, 60%, 80%, 100% { opacity: 0.35; }
+  10%, 30%, 50%, 70%, 90% { opacity: 0.1; }
+}
+@keyframes coinBurst {
+  0% { transform: scale(0.4); opacity: 0; }
+  60% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.1); opacity: 0; }
+}
+@keyframes moneyFly {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-40%); opacity: 0; }
+}
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.45); }
+  100% { box-shadow: 0 0 0 28px rgba(34,197,94,0); }
+}
+
+@keyframes dealIn {
+  0% { opacity: 0; transform: translateY(-8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes sparkleBurst {
+  0% { opacity: 0; transform: scale(0.6); }
+  60% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0; transform: scale(1.15); }
+}
